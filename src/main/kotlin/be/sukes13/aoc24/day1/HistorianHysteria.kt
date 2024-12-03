@@ -6,9 +6,7 @@ import kotlin.math.abs
 fun part1(input: String) = input.toVerticalLists()
     .run { first.sorted() to second.sorted() }
     .run {
-        first.mapIndexed { index, leftValue ->
-            abs(leftValue - second[index])
-        }.sum()
+        first.zip(second).sumOf { (left, right) -> abs(left - right) }
     }
 
 fun part2(input: String) = input.toVerticalLists()
@@ -17,7 +15,6 @@ fun part2(input: String) = input.toVerticalLists()
             leftValue * second.count { it == leftValue }
         }
     }
-
 
 private fun String.toVerticalLists() = mapLines {
     it.split("   ").run {
